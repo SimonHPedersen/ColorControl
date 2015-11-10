@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+                self.view.backgroundColor = UIColor.blackColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
 
     
     @IBAction func backward(sender: AnyObject) {
-        self.view.backgroundColor = UIColor.blackColor()
+        self.view.backgroundColor = UIColor.redColor()
     }
 
     @IBAction func forward(sender: AnyObject) {
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func stop(sender: AnyObject) {
-        self.view.backgroundColor = UIColor.redColor()
+        self.view.backgroundColor = UIColor.blackColor()
     }
 
     @IBAction func right(sender: AnyObject) {
@@ -44,5 +45,10 @@ class ViewController: UIViewController {
     }
 
     @IBOutlet var colorLabel: UILabel!
+    
+    
+    
+    
+    
 }
 
