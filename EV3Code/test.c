@@ -8,8 +8,12 @@ int main()
 {
   int i;
   LcdInit();
-  LcdText(1, 0, 100, "Hello World!");
+  LcdText(1, 10, 10, "TRIFORK!!!!");
   Wait(SEC_1);
   LcdExit();
 }
 
+void setCameraAngle(int a)
+{
+
+}
