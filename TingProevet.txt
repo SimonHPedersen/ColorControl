@@ -1,0 +1,6 @@
+ting vi har prøvet:
+	- farvesensor implementation via lmsapi og gnu c
+	- farvesensor implementation via officiel Programmer
+	- binær datasendelse og Ev3Basic (Ev3Basic fik vi ikke til at køre)
+	- morsekode sender og reader implementeret i ROBOTC og processing. Ikke akkurat nok til at få data fra A til B
+	- Øl
