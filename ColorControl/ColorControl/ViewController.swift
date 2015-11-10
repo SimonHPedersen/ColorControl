@@ -7,48 +7,72 @@
 //
 
 import UIKit
+import MDG
 
 class ViewController: UIViewController {
-
-    let colors : [UIColor] = [UIColor.blueColor(), UIColor.redColor(), UIColor.yellowColor(), UIColor.greenColor()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-                self.view.backgroundColor = UIColor.blackColor()
+        client.pairingDelegate = self
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
-    @IBAction func backward(sender: AnyObject) {
-        self.view.backgroundColor = UIColor.redColor()
-    }
-
-    @IBAction func forward(sender: AnyObject) {
-                self.view.backgroundColor = UIColor.greenColor()
+    @IBOutlet weak var otpLabel: UILabel!
+    
+    
+    @IBAction func enablePairing(sender: AnyObject) {
+        client.openForPairing()
     }
     
-    @IBAction func left(sender: AnyObject) {
-                self.view.backgroundColor = UIColor.yellowColor()
+    @IBOutlet weak var statusLabel: UILabel! {
+        didSet {
+            statusLabel.text = "Not connected"
+        }
     }
     
-    @IBAction func stop(sender: AnyObject) {
-        self.view.backgroundColor = UIColor.blackColor()
+    let client = MDGClient.sharedClient
+    
+    func formatOtp(otp: String) -> String {
+        var formattedOtp = ""
+        for (i, number) in otp.characters.enumerate() {
+            formattedOtp.append(number)
+            if (i % 3 == 2) && (i < otp.characters.count - 1) {
+                formattedOtp += "-"
+            }
+        }
+        return formattedOtp
     }
-
-    @IBAction func right(sender: AnyObject) {
-                self.view.backgroundColor = UIColor.blueColor()
-    }
-
-    @IBOutlet var colorLabel: UILabel!
-    
-    
-    
-    
-    
 }
+
+// MARK: - Actions
+
+/*extension ViewController {
+    @IBAction func openForPairing(sender: AnyObject) {
+        client.openForPairing()
+    }
+}*/
+
+extension ViewController: PairingDelegate {
+    func pairingStateChanged(state: MDGPairingState) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.statusLabel.text = state.status.stringValue
+            if state.status == .OneTimePasscodeReady {
+                self.otpLabel.text = self.formatOtp(state.oneTimePasscode)
+            }
+            else {
+                self.otpLabel.text = ""
+            }
+        }
+    }
+
+}
+    
+    
+
 

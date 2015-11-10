@@ -13,7 +13,11 @@
 		CE0871691BEF8EC90025646C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0871671BEF8EC90025646C /* Main.storyboard */; };
 		CE08716B1BEF8EC90025646C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE08716A1BEF8EC90025646C /* Assets.xcassets */; };
 		CE08716E1BEF8EC90025646C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE08716C1BEF8EC90025646C /* LaunchScreen.storyboard */; };
-		CE4490491BF272D40033A7E8 /* MDG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4490481BF272D40033A7E8 /* MDG.framework */; };
+		CE4490491BF272D40033A7E8 /* MDG.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4490481BF272D40033A7E8 /* MDG.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		CE44904D1BF278C20033A7E8 /* MDGClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44904C1BF278C20033A7E8 /* MDGClient.swift */; };
+		CE44904F1BF286520033A7E8 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE44904E1BF286520033A7E8 /* MessageStore.swift */; };
+		CE4490511BF288950033A7E8 /* MDGPairingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4490501BF288950033A7E8 /* MDGPairingStatus.swift */; };
+		CE4490521BF28E060033A7E8 /* MDG.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4490481BF272D40033A7E8 /* MDG.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,6 +27,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				CE4490521BF28E060033A7E8 /* MDG.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +43,9 @@
 		CE08716D1BEF8EC90025646C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE08716F1BEF8EC90025646C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE4490481BF272D40033A7E8 /* MDG.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MDG.framework; path = MDGChat/Externals/MDG.framework; sourceTree = "<group>"; };
+		CE44904C1BF278C20033A7E8 /* MDGClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDGClient.swift; sourceTree = "<group>"; };
+		CE44904E1BF286520033A7E8 /* MessageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
+		CE4490501BF288950033A7E8 /* MDGPairingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDGPairingStatus.swift; sourceTree = "<group>"; };
 		DA534BF929ECBFC2818BE37B /* Pods-ColorControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorControl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorControl/Pods-ColorControl.debug.xcconfig"; sourceTree = "<group>"; };
 		FAF31494B3ACAC7A05D8DBBA /* Pods-ColorControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorControl/Pods-ColorControl.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -67,7 +75,7 @@
 		CE0871571BEF8EC90025646C = {
 			isa = PBXGroup;
 			children = (
-				CE4490481BF272D40033A7E8 /* MDG.framework */,
+				CE44904A1BF276AE0033A7E8 /* Externals */,
 				CE0871621BEF8EC90025646C /* ColorControl */,
 				CE0871611BEF8EC90025646C /* Products */,
 				7FD882A52661828784CFF7DF /* Pods */,
@@ -86,6 +94,7 @@
 		CE0871621BEF8EC90025646C /* ColorControl */ = {
 			isa = PBXGroup;
 			children = (
+				CE44904B1BF278AC0033A7E8 /* MDGHelpers */,
 				CE0871631BEF8EC90025646C /* AppDelegate.swift */,
 				CE0871651BEF8EC90025646C /* ViewController.swift */,
 				CE0871671BEF8EC90025646C /* Main.storyboard */,
@@ -94,6 +103,24 @@
 				CE08716F1BEF8EC90025646C /* Info.plist */,
 			);
 			path = ColorControl;
+			sourceTree = "<group>";
+		};
+		CE44904A1BF276AE0033A7E8 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				CE4490481BF272D40033A7E8 /* MDG.framework */,
+			);
+			name = Externals;
+			sourceTree = "<group>";
+		};
+		CE44904B1BF278AC0033A7E8 /* MDGHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				CE44904C1BF278C20033A7E8 /* MDGClient.swift */,
+				CE44904E1BF286520033A7E8 /* MessageStore.swift */,
+				CE4490501BF288950033A7E8 /* MDGPairingStatus.swift */,
+			);
+			name = MDGHelpers;
 			sourceTree = "<group>";
 		};
 		E30DA500DD8E94B86F5F0C81 /* Frameworks */ = {
@@ -228,8 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE44904D1BF278C20033A7E8 /* MDGClient.swift in Sources */,
+				CE4490511BF288950033A7E8 /* MDGPairingStatus.swift in Sources */,
 				CE0871661BEF8EC90025646C /* ViewController.swift in Sources */,
 				CE0871641BEF8EC90025646C /* AppDelegate.swift in Sources */,
+				CE44904F1BF286520033A7E8 /* MessageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
