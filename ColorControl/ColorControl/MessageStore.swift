@@ -27,7 +27,7 @@ protocol MessageStorageDelegate {
     func addedMessage(message: Message)
 }
 
-class MessageStorage: NSObject {
+public class MessageStorage: NSObject {
     var delegate: MessageStorageDelegate?
     var messages = [Message]()
     

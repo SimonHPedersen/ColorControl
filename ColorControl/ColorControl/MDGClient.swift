@@ -22,8 +22,8 @@ public protocol ConnectionDelegate: NSObjectProtocol {
 }
 
 public class MDGClient: NSObject {
+    public static let sharedMessageStorage : MessageStorage = MessageStorage()
     public static let sharedClient = MDGClient()
-    let messageStorage = MessageStorage()
     private let core = MDGCore.sharedCore()
     private var properties: [String: String] {
         var props = [String: String]()
@@ -97,6 +97,7 @@ public class MDGClient: NSObject {
         }
         return peerId.substringToIndex(peerId.startIndex.advancedBy(12)) + "..."
     }
+    
 }
 
 extension MDGClient: MDGCoreDelegate {
@@ -116,6 +117,6 @@ extension MDGClient: MDGCoreDelegate {
 
 extension MDGClient: MDGPeerConnectionDelegate {
     public func connection(connection: MDGPeerConnection, didReceiveData data: NSData) {
-        self.messageStorage.addData(data, forConnection: connection, sender: .Them)
+        MDGClient.sharedMessageStorage.addData(data, forConnection: connection, sender: .Them)
     }
 }

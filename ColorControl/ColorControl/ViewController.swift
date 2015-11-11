@@ -10,14 +10,22 @@ import UIKit
 import MDG
 
 class ViewController: UIViewController {
-    
+    var connection: MDGPeerConnection!
+    internal var messages: [Message] = []
+    let client = MDGClient.sharedClient
+    var peerId : String = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        client.pairingDelegate = self
-
     }
 
+    override func viewWillAppear(animated: Bool) {
+        //var client = MDGClient.sharedClient
+        client.pairingDelegate = self
+        MDGClient.sharedMessageStorage.delegate = self
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -35,8 +43,6 @@ class ViewController: UIViewController {
             statusLabel.text = "Not connected"
         }
     }
-    
-    let client = MDGClient.sharedClient
     
     func formatOtp(otp: String) -> String {
         var formattedOtp = ""
@@ -70,12 +76,53 @@ extension ViewController: PairingDelegate {
             }
             if state.status == .Completed {
                 self.view.backgroundColor = UIColor.blackColor()
+                self.peerId = MDGClient.sharedClient.pairings[0]
+                do {
+                    self.connection = try MDGClient.sharedClient.connectToPeer(self.peerId)
+                }
+                catch let error as NSError {
+                    NSLog("ERROR connecting \(error)")
+                }
+                
+
+                //MDGCore.connections()
+                /*
+                if let peerId = self.connection.peerId {
+                    self.messages = MDGClient.sharedMessageStorage.messages.filter { $0.peerId == peerId }.reverse()
+                }*/
             }
         }
     }
 
 }
+
+
+extension ViewController: MessageStorageDelegate {
     
+    func addedMessage(message: Message) {
+        
+        if let peerId = self.connection.peerId where message.peerId == peerId {
+            dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                if let strongSelf = self {
+                    if strongSelf.view.backgroundColor == UIColor.whiteColor() {
+                        strongSelf.view.backgroundColor = UIColor.blackColor()
+                    }
+                    else if strongSelf.view.backgroundColor == UIColor.blackColor() {
+                        strongSelf.view.backgroundColor = UIColor.whiteColor()
+                    }
+                }
+
+                /* TODO parse message
+                if message.text == "stop" {
+                    if let strongSelf = self {
+                        strongSelf.view.backgroundColor = UIColor.whiteColor()
+                    }
+                }
+                */
+            }
+        }
+    }
+}
     
 
 
