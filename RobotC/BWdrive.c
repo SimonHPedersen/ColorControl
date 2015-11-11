@@ -58,13 +58,20 @@ void newCmd()
 	memset(&buffer[0], 0, sizeof(buffer));
 	added = 0;
 
-	if (cmd == 4) playSound(soundFastUpwardTones);
+	switch (cmd) {
+		case 0: moveMotorTarget(RightMotor,1000,100); moveMotorTarget(LeftMotor,1000,100);  break; // Forward
+		case 1: moveMotorTarget(RightMotor,1000,-100); moveMotorTarget(LeftMotor,1000,-100);  break; // Backwards
+		case 2: moveMotorTarget(RightMotor,360,100); moveMotorTarget(LeftMotor,360,-100);  break; // Left
+		case 3: moveMotorTarget(RightMotor,360,-100); moveMotorTarget(LeftMotor,360,100);  break; // Right
+
+	}
+	displayString(13, "newCMD");
 }
 
 void addSignal(bool isLong)
 {
 
-	//displayString(11, isLong?"Long":"Short");
+	displayString(13, isLong?"Long":"Short");
 	buffer[added++] = isLong;
 }
 
@@ -84,6 +91,7 @@ task main()
 		if (now!=pre) // detect edge
 		{
 			int speed = now?66:0;
+			setLEDColor(now?ledGreen:ledOff);
 			//setMotorSpeed(leftMotor,speed);
 			//setMotorSpeed(rightMotor,speed);
 
@@ -100,9 +108,13 @@ task main()
 				int sinceLast = time1[T2];
 				clearTimer(T2);
 				sprintf(str, "%d", sinceLast);
-				displayString(13,str);
-				if (sinceLast>cmdSpace || added==6-1) {
+				//displayString(13,str);
+				if (sinceLast>cmdSpace) {
 					newCmd();
+				} else if(added==6-1){
+					// clear buffer
+					memset(&buffer[0], 0, sizeof(buffer));
+					added = 0;
 				} else {
 					addSignal( sinceLast>shortLongBorder );
 				}

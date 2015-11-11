@@ -5,16 +5,16 @@ int [][] morseTable =
   {1,0,0,0,-1,-1},     // b
   {1,0,1,0,-1,-1},    // c
   {0,-1,-1,-1,-1,-1},  // e
-  {0,0,1,0,-1,-1},    // f
+  {0,0,1,0,-1,-1},   // f
   {1,1,0,-1,-1,-1},    // g
 };
 
 int i = 0;
 int signal = 4; // what we send
 
-int signalspace = 200;
-int shortsignal = 200;
-int longsignal = 800;
+int signalspace = 300;
+int shortsignal = 300;
+int longsignal = 900;
 int cmdspace = 3000;
 
 int l = 0;
