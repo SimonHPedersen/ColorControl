@@ -4,20 +4,18 @@ int [][] morseTable =
   {0,1,-1,-1,-1,-1},   // a
   {1,0,0,0,-1,-1},     // b
   {1,0,1,0,-1,-1},    // c
-  {1,0,0,-1,-1,-1},    // d
   {0,-1,-1,-1,-1,-1},  // e
   {0,0,1,0,-1,-1},    // f
   {1,1,0,-1,-1,-1},    // g
-  {0,0,0,0,-1,-1}      // h
 };
 
 int i = 0;
-int signal = 5; // what we send
+int signal = 4; // what we send
 
-int signalspace = 500;
-int shortsignal = 1000;
-int longsignal = 3000;
-int cmdspace = 4000;
+int signalspace = 200;
+int shortsignal = 200;
+int longsignal = 800;
+int cmdspace = 3000;
 
 int l = 0;
 int c = 0;
