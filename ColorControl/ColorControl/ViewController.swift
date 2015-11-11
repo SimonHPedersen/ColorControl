@@ -68,6 +68,9 @@ extension ViewController: PairingDelegate {
             else {
                 self.otpLabel.text = ""
             }
+            if state.status == .Completed {
+                self.view.backgroundColor = UIColor.blackColor()
+            }
         }
     }
 
