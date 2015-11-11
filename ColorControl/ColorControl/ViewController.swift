@@ -75,7 +75,6 @@ extension ViewController: PairingDelegate {
                 self.otpLabel.text = ""
             }
             if state.status == .Completed {
-                self.view.backgroundColor = UIColor.blackColor()
                 self.peerId = MDGClient.sharedClient.pairings[0]
                 do {
                     self.connection = try MDGClient.sharedClient.connectToPeer(self.peerId)
@@ -104,11 +103,12 @@ extension ViewController: MessageStorageDelegate {
         if let peerId = self.connection.peerId where message.peerId == peerId {
             dispatch_async(dispatch_get_main_queue()) { [weak self] in
                 if let strongSelf = self {
-                    if strongSelf.view.backgroundColor == UIColor.whiteColor() {
+                    if message.text?.lowercaseString == "stop" {
                         strongSelf.view.backgroundColor = UIColor.blackColor()
-                    }
-                    else if strongSelf.view.backgroundColor == UIColor.blackColor() {
+                    } else if message.text?.lowercaseString == "start" {
                         strongSelf.view.backgroundColor = UIColor.whiteColor()
+                    } else {
+                        strongSelf.view.backgroundColor = UIColor.blackColor()
                     }
                 }
 
