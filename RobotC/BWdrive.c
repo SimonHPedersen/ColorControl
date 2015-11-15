@@ -11,8 +11,8 @@ int tMaxValue = threshold;
 int tMinValue = threshold;
 int calibInterval = 4000;
 
-const int cmdSpace = 2000;
-const int shortLongBorder = 600;
+const int cmdSpace = 2500; // needs to be slightly bigger than on the transmitter
+const int shortLongBorder = 700; // right in between the transmitters long and short signal length (inkl. signalspace)
 
 const int morseTable[6][6] =
 {
@@ -37,18 +37,19 @@ void newCmd()
 		{
 			if (buffer[s] != morseTable[c][s]) break;
 		}
-		if (s==sizeof(buffer)
+		if (s==sizeof(buffer))
 			{
 				cmd = c;
 				break;
 			}
 	}
 	char str[15];
+	/*
 	sprintf(str, "%d %d %d %d %d %d", buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5] );
 	displayString(10, str);
 	sprintf(str, "%d %d %d %d %d %d", morseTable[4][0],morseTable[4][1],morseTable[4][2],morseTable[4][3],morseTable[4][4],morseTable[4][5] );
 	displayString(11, str);
-
+	*/
 	sprintf(str,"%d",cmd);
 	displayString(14, str);
 
@@ -90,10 +91,7 @@ task main()
 		now = v>threshold;
 		if (now!=pre) // detect edge
 		{
-			int speed = now?66:0;
 			setLEDColor(now?ledGreen:ledOff);
-			//setMotorSpeed(leftMotor,speed);
-			//setMotorSpeed(rightMotor,speed);
 
 			if (v > tMaxValue) tMaxValue = v;
 			if (v < tMinValue) tMinValue = v;
@@ -105,14 +103,12 @@ task main()
 
 			if (pre) // falling edge
 			{
-				int sinceLast = time1[T2];
+				long sinceLast = time1[T2];
 				clearTimer(T2);
-				sprintf(str, "%d", sinceLast);
-				//displayString(13,str);
 				if (sinceLast>cmdSpace) {
 					newCmd();
 				} else if(added==6-1){
-					// clear buffer
+					// clear buffer and discard
 					memset(&buffer[0], 0, sizeof(buffer));
 					added = 0;
 				} else {
