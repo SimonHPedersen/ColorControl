@@ -96,27 +96,87 @@ extension ViewController: PairingDelegate {
 }
 
 /**
+ int [][] morseTable =
+ {
+ {0,1,-1,-1,-1,-1},   // a
+ {1,0,0,0,-1,-1},     // b
+ {1,0,1,0,-1,-1},    // c
+ {0,-1,-1,-1,-1,-1},  // e
+ {0,0,1,0,-1,-1},    // f
+ {1,1,0,-1,-1,-1},    // g
+ };
  
-
+ int i = 0;
+ int signal = 4; // what we send
+ 
+ int signalspace = 200;
+ int shortsignal = 200;
+ int longsignal = 800;
+ int cmdspace = 3000;
 */
 
 
 extension ViewController: MessageStorageDelegate {
     
+    
+    
     func addedMessage(message: Message) {
-        
         if let peerId = self.connection.peerId where message.peerId == peerId {
-            dispatch_async(dispatch_get_main_queue()) { [weak self] in
-                if let strongSelf = self {
+            dispatch_async(dispatch_get_main_queue()) {
                     if message.text?.lowercaseString == "stop" {
-                        strongSelf.view.backgroundColor = UIColor.blackColor()
-                    } else if message.text?.lowercaseString == "start" {
-                        strongSelf.view.backgroundColor = UIColor.whiteColor()
+                        self.view.backgroundColor = UIColor.blackColor()
+                    } else if message.text?.lowercaseString == "a" {
+                        NSLog("Sending a");
+                        self.view.backgroundColor = UIColor.whiteColor()
+                        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                    } else if message.text?.lowercaseString == "b" {
+                        NSLog("Sending b");
+                        self.view.backgroundColor = UIColor.whiteColor()
+                        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.4, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.6, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.8, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "black", userInfo: nil, repeats: false)
+                    } else if message.text?.lowercaseString == "c" {
+                        NSLog("Sending c");
+                        self.view.backgroundColor = UIColor.whiteColor()
+                        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.4, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.4, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.6, target: self, selector: "black", userInfo: nil, repeats: false)
+                    } else if message.text?.lowercaseString == "e" {
+                        NSLog("Sending e");
+                        self.view.backgroundColor = UIColor.whiteColor()
+                        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                    } else if message.text?.lowercaseString == "f" {
+                        NSLog("Sending f");
+                        NSTimer.scheduledTimerWithTimeInterval(0.2, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.6, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.8, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "black", userInfo: nil, repeats: false)
+                    } else if message.text?.lowercaseString == "g" {
+                        NSLog("Sending g");
+                        NSTimer.scheduledTimerWithTimeInterval(0.8, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(1.8, target: self, selector: "black", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "white", userInfo: nil, repeats: false)
+                        NSTimer.scheduledTimerWithTimeInterval(2.2, target: self, selector: "black", userInfo: nil, repeats: false)
                     } else {
-                        strongSelf.view.backgroundColor = UIColor.blackColor()
-                    }
+                        self.view.backgroundColor = UIColor.blackColor()
                 }
+                
 
+                
                 /* TODO parse message
                 if message.text == "stop" {
                     if let strongSelf = self {
@@ -127,7 +187,15 @@ extension ViewController: MessageStorageDelegate {
             }
         }
     }
-}
     
+    func white() {
+        self.view.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func black() {
+        self.view.backgroundColor = UIColor.blackColor()
+    }
+}
+
 
 
